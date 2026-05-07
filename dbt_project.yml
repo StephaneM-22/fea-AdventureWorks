@@ -20,7 +20,9 @@ models:
   fea_adventure_works:
     staging:
       +materialized: view
-      +schema: adventure_works
     marts:
       +materialized: table
-      +schema: adventure_works
+      dimensions:
+        +materialized: table
+      facts:
+        +materialized: table
