@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: fct_vendas
+    description: "Tabela fato de vendas. Granularidade: uma linha por item de pedido (salesorderid + salesorderdetailid). O filtro por motivo de venda é feito via stg_order_salesreason no BI."
+    columns:
+      - name: fct_vendas_sk
+        description: "Surrogate key da tabela fato."
+        tests:
+          - unique
+          - not_null
+      - name: salesorderid
+        description: "Chave natural do pedido."
+        tests:
+          - not_null
+      - name: salesorderdetailid
+        description: "Chave natural do item do pedido."
+        tests:
+          - not_null
+      - name: data_sk
+        description: "FK para dim_data."
+        tests:
+          - not_null
+      - name: produto_sk
+        description: "FK para dim_produto."
+        tests:
+          - not_null
+      - name: cliente_sk
+        description: "FK para dim_cliente."
+        tests:
+          - not_null
+      - name: entregas_sk
+        description: "FK para dim_entregas."
+      - name: cartao_sk
+        description: "FK para dim_cartao."
+      - name: orderqty
+        description: "Quantidade comprada do item."
+        tests:
+          - not_null
+      - name: unitprice
+        description: "Preço unitário do produto."
+        tests:
+          - not_null
+      - name: unitpricediscount
+        description: "Percentual de desconto aplicado."
+      - name: status
+        description: "Status numérico do pedido."
+      - name: status_descricao
+        description: "Descrição do status do pedido."
+      - name: valor_bruto
+        description: "Valor bruto — unitprice * orderqty."
+        tests:
+          - not_null
+      - name: valor_liquido
+        description: "Valor líquido — unitprice * orderqty * (1 - desconto)."
+        tests:
+          - not_null
