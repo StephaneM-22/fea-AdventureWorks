@@ -55,3 +55,128 @@ models:
         description: "Valor líquido — unitprice * orderqty * (1 - desconto)."
         tests:
           - not_null
+
+  - name: dim_cliente
+    description: "Dimensão de clientes com nome e tipo de pessoa."
+    columns:
+      - name: cliente_sk
+        description: "Surrogate key da dimensão cliente."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Chave natural do cliente."
+        tests:
+          - not_null
+      - name: nome_cliente
+        description: "Nome completo do cliente."
+        tests:
+          - not_null
+      - name: tipo_pessoa
+        description: "Tipo de pessoa — Individual ou Store."
+
+  - name: dim_produto
+    description: "Dimensão de produtos com categoria e subcategoria."
+    columns:
+      - name: produto_sk
+        description: "Surrogate key da dimensão produto."
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Chave natural do produto."
+        tests:
+          - not_null
+      - name: nome_produto
+        description: "Nome do produto."
+        tests:
+          - not_null
+      - name: categoria
+        description: "Categoria do produto."
+      - name: subcategoria
+        description: "Subcategoria do produto."
+
+  - name: dim_data
+    description: "Dimensão de datas com calendário analítico."
+    columns:
+      - name: data_sk
+        description: "Surrogate key da dimensão data."
+        tests:
+          - unique
+          - not_null
+      - name: order_date
+        description: "Data do pedido."
+        tests:
+          - unique
+          - not_null
+      - name: ano
+        description: "Ano do pedido."
+        tests:
+          - not_null
+      - name: mes
+        description: "Mês do pedido."
+        tests:
+          - not_null
+      - name: nome_mes
+        description: "Nome do mês."
+      - name: trimestre
+        description: "Trimestre do pedido."
+      - name: semestre
+        description: "Semestre do pedido."
+      - name: ano_mes
+        description: "Ano e mês no formato YYYY-MM."
+
+  - name: dim_entregas
+    description: "Dimensão de endereços de entrega com cidade, estado e país."
+    columns:
+      - name: entregas_sk
+        description: "Surrogate key da dimensão entregas."
+        tests:
+          - unique
+          - not_null
+      - name: address_id
+        description: "Chave natural do endereço."
+        tests:
+          - not_null
+      - name: cidade
+        description: "Cidade do endereço de entrega."
+      - name: estado
+        description: "Estado do endereço de entrega."
+      - name: pais
+        description: "País do endereço de entrega."
+
+  - name: dim_cartao
+    description: "Dimensão de cartões de crédito utilizados nos pedidos."
+    columns:
+      - name: cartao_sk
+        description: "Surrogate key da dimensão cartão."
+        tests:
+          - unique
+          - not_null
+      - name: credit_card_id
+        description: "Chave natural do cartão."
+        tests:
+          - not_null
+      - name: tipo_cartao
+        description: "Tipo do cartão — Visa, MasterCard, AmericanExpress, Discover."
+        tests:
+          - not_null
+
+  - name: dim_motivo_venda
+    description: "Dimensão de motivos de venda — Price, Promotion, Quality, etc."
+    columns:
+      - name: motivo_venda_sk
+        description: "Surrogate key da dimensão motivo de venda."
+        tests:
+          - unique
+          - not_null
+      - name: sales_reason_id
+        description: "Chave natural do motivo de venda."
+        tests:
+          - not_null
+      - name: nome_motivo
+        description: "Nome do motivo de venda."
+        tests:
+          - not_null
+      - name: tipo_motivo
+        description: "Tipo do motivo — Other, Promotion, Marketing."
